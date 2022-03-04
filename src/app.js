@@ -1087,20 +1087,8 @@ app.post('/cart-verify', async function(req, res, next) {
 
 
 // post request to add shops from admin
-const SingleStorage = FirebaseStorage({
-    bucketName: process.env.BUCKET_URL,
-        credentials: {
-          clientEmail: process.env.CLIENT_Email,
-          projectId: process.env.project_Id,
-          privateKey: process.env.PRIVATE_Key.replace(/\\n/g, '\n'),
-        },
-        directoryPath:'verifieduploads',
-        public:true
-        
-})
-
 var singleupload = multer({
-    storage:SingleStorage, 
+    storage:storage, 
     limits:{
         fileSize: 1024*1024*5
     }
@@ -1126,19 +1114,8 @@ app.post("/Verify-Shop",singleupload,async(req,res)=>{
 })
 
 // Car post request
-const CarStorage = FirebaseStorage({
-    bucketName: process.env.BUCKET_URL,
-        credentials: {
-          clientEmail: process.env.CLIENT_Email,
-          projectId: process.env.project_Id,
-          privateKey: process.env.PRIVATE_Key.replace(/\\n/g, '\n'),
-        },
-        directoryPath:'Caruploads',
-        public:true
-        
-})
 var carupload = multer({
-    storage:CarStorage, 
+    storage:storage, 
     limits:{
         fileSize: 1024*1024*5
     }
