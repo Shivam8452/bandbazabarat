@@ -872,11 +872,11 @@ app.post("/index1", async (req, res) =>{
 
 
 const storage = FirebaseStorage({
-    bucketName: process.env.BUCKET_URL,
+    bucketName: process.env.FIREBASE_BUCKET_URL,
         credentials: {
           clientEmail: process.env.CLIENT_Email,
-          projectId: process.env.project_Id,
-          privateKey: process.env.PRIVATE_Key,
+          projectId: process.env.FIREBASE_project_Id,
+          privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
         },
         directoryPath:'uploads',
         public:true
