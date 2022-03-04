@@ -321,7 +321,7 @@ app.get("/admin-manageBookings",loginrequired,(req,res)=>{
                     cart = new Cart(order.cart);
                     order.items = cart.generateArray();
                 })
-                res.render("manageBookings", {
+                res.render("ManageBookings", {
                     title: "Bookings",
                     bookings: data,
                     cars: doc
