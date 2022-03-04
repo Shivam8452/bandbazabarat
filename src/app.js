@@ -876,7 +876,7 @@ const storage = FirebaseStorage({
         credentials: {
           clientEmail: process.env.CLIENT_Email,
           projectId: process.env.project_Id,
-          privateKey: process.env.PRIVATE_Key.replace(/\\n/g, '\n'),
+          privateKey: process.env.FIREBASE_PRIVATE_Key.replace(/\\n/g, '\n'),
         },
         directoryPath:'uploads',
         public:true
