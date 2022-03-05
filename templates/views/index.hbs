@@ -12,10 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&family=Bree+Serif&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
-<body>
-</head>
-</head>
-<body>
+<body onload="myFunction()">
+    <div id="loading"></div>
     <section class="navigation sticky">
   <div class="nav-container">
     <div class="brand">
@@ -293,6 +291,13 @@
                         <span>Everyday (9:00am - 9:00pm)</span>
                     </div>
                 </div>
+                <div class="address">
+                    <img src="/icons/location2.svg" alt="">
+                    <div>
+                        <span>Operational address:</span>
+                        <span>Gt road, chawk ,khaga, Fatehpur, Uttar Pradesh - 212655</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -433,6 +438,12 @@
     });
   }); 
 })(jQuery); 
+</script>
+<script>
+    var preloader = document.getElementById("loading");
+    function myFunction(){
+			preloader.style.display = 'none';
+		};
 </script>
 </body>
 </html>
