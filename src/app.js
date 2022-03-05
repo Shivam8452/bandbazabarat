@@ -715,7 +715,8 @@ app.post("/register", async (req,res) =>{
                 emailToken: crypto.randomBytes(64).toString('hex'),
                 isVerified: false,
                 Password : Password,
-                ConfirmPassword : cPassword
+                ConfirmPassword : cPassword,
+                termsprivacy:req.body.termsprivacy
             })
 
             const token = await registerEmployee.generateAuthToken();
@@ -1288,6 +1289,13 @@ app.post("/subadmin/login", async (req, res) => {
        
    }
 });
+// privacy policy &tems
+app.get('/privacy&policy',(req,res)=>{
+    res.render('privacy')
+})
+app.get('/terms&conditions',(req,res)=>{
+    res.render('terms')
+})
 
 app.listen(port, ()=>{
     console.log(`server is running at port no ${port}`);

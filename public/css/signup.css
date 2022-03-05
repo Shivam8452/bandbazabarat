@@ -7,7 +7,7 @@
 }
 body{
     background-color: #ecf0f3;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 .Warning{
     background:#ffdb96;
@@ -219,12 +219,18 @@ form label input:focus{
     margin: 20px 6rem;
     display: flex;
     align-items: center;
+    width: 100%;
 
 }
 .checkbox input{
     height: 16px;
     width: 16px;
     margin: 0 12px;
+}
+.btn{
+    width: 100%;
+    text-align: center;
+    margin: 12px;
 }
 button{
     padding: 10px 65px;

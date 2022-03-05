@@ -27,6 +27,10 @@ const employeeSchema = new mongoose.Schema({
         // required:true
    
     },
+    termsprivacy:{
+        type:String,
+        required:true
+    },
     emailToken:{
         type:String
 
