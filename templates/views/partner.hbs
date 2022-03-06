@@ -43,7 +43,8 @@
                 <div class="column">
                             <div class="input-group ">
                                 <label for="img_proof" class="required">Upload Id image</label>
-                                <input type="file" name="img_proof" id="proof" class="img" required/>
+                                <input type="file" name="img_proof" id="proof" class="img" accept="image/*" onchange="imageExtensionValidate(this)" required/>
+                                <div id="feedback"> </div>
                             </div>
                             <div class="input-group">
                                 <label for="address" class="required">Complete address</label>
@@ -84,8 +85,9 @@
                         <input type="number" name="distance" id="distance" placeholder="How far will you go in a booking" required/>
                       </div>
                       <div class="input-group ">
-                        <label for="Banner_img" class="required">Upload Banner image</label>
-                        <input type="file" name="Banner_img" id="Banner" class="img" required/>
+                        <label for="Banner_img" class="required">Upload Shop image</label>
+                        <input type="file" name="Banner_img" id="Banner" class="img" accept="image/*" onchange="imageExtensionValidate(this)" required/>
+                        <div id="feedbackban"> </div>
                       </div>
                 </div>
             </div>
@@ -119,7 +121,8 @@
                       
                       <div class="input-group">
                         <label for="passbook_img" class="required">Upload Passbook image</label>
-                        <input type="file" name="passbook_img" id="passbook" class="img" required/>
+                        <input type="file" name="passbook_img" id="passbook" class="img" accept="image/*" onchange="imageExtensionValidate(this)" required/>
+                        <div id="feedbackpass"> </div>
                       </div>
                     </div>
                 </div>
@@ -130,5 +133,7 @@
                 </div>
             </form>
     </div>
+    <script src="/js/imgvalidate.js"></script>
+    <script src="/js/imgtypevalidate.js"></script>
 </body>
 </html>
