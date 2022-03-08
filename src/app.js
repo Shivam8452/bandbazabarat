@@ -39,6 +39,7 @@ const CarBooking = require("./models/BookedCars")
 
 
 const {loginrequired} = require("../config/JWT");
+const {checkAdmin} = require('../config/authadmin');
 const {verifyEmail} = require("../config/verifyemail");
 const res = require("express/lib/response");
 const { handlebars } = require("hbs");
@@ -202,7 +203,7 @@ app.get("/partner",loginrequired, (req, res) => {
 // admin setup
 
 // user
-app.get("/admin-manageuser",loginrequired,(req,res)=>{
+app.get("/admin-manageuser",checkAdmin,(req,res)=>{
     Register.find((err, data)=>{
         if(!err){
             res.render("manageuser", {
@@ -214,7 +215,7 @@ app.get("/admin-manageuser",loginrequired,(req,res)=>{
     }).lean()
     
 })
-app.get("/delete/:id",(req,res)=>{
+app.get("/delete/:id",checkAdmin,(req,res)=>{
     Register.findByIdAndRemove(req.params.id,(err, data)=>{
         if(!err){
             res.redirect("/admin-manageuser");
@@ -227,13 +228,13 @@ app.get("/delete/:id",(req,res)=>{
 })
 
 //Shop Management
-app.get("/Verify-Shop",loginrequired, (req,res)=>{
+app.get("/Verify-Shop",checkAdmin, (req,res)=>{
     res.render("VerifiedShops")
 })
-app.get("/addCars",loginrequired, (req,res)=>{
+app.get("/addCars",checkAdmin, (req,res)=>{
     res.render("AddCars")
 })
-app.get("/admin-manageAllShops",loginrequired,(req,res)=>{
+app.get("/admin-manageAllShops",checkAdmin,(req,res)=>{
     Shop.find((err,data)=>{
         if(!err){
             res.render("AllShops",{
@@ -243,7 +244,7 @@ app.get("/admin-manageAllShops",loginrequired,(req,res)=>{
         }
     }).clone().populate('user', '-Password -tokens -isVerified -emailToken -Date').exec()
 })
-app.get("/delete/unverified/shop/:id",(req,res)=>{
+app.get("/delete/unverified/shop/:id",checkAdmin,(req,res)=>{
     Shop.findByIdAndRemove(req.params.id,(err, data)=>{
         if(!err){
             res.redirect("/admin-manageAllShops");
@@ -254,7 +255,7 @@ app.get("/delete/unverified/shop/:id",(req,res)=>{
     })
     
 })
-app.get("/admin-manageShops",loginrequired,(req,res)=>{
+app.get("/admin-manageShops",checkAdmin,(req,res)=>{
     VerifiedShop.find((err, data)=>{
         if(!err){
             res.render("manageShops", {
@@ -265,7 +266,7 @@ app.get("/admin-manageShops",loginrequired,(req,res)=>{
         }
     }).lean()
 })
-app.get("/delete-shop/:id",(req,res)=>{
+app.get("/delete-shop/:id",checkAdmin,(req,res)=>{
     VerifiedShop.findByIdAndRemove(req.params.id,(err, data)=>{
         if(!err){
             res.redirect("/admin-manageShops");
@@ -279,7 +280,7 @@ app.get("/delete-shop/:id",(req,res)=>{
 
 
 // Car Management
-app.get("/admin-manageCars",loginrequired,(req,res)=>{
+app.get("/admin-manageCars",checkAdmin,(req,res)=>{
     Cars.find((err, data)=>{
         if(!err){
             res.render("ManageCars", {
@@ -290,7 +291,7 @@ app.get("/admin-manageCars",loginrequired,(req,res)=>{
         }
     }).lean()
 })
-app.get("/delete-Cars/:id",loginrequired,(req,res)=>{
+app.get("/delete-Cars/:id",checkAdmin,(req,res)=>{
     Cars.findByIdAndRemove(req.params.id,(err, data)=>{
         if(!err){
             res.redirect("/admin-manageCars");
@@ -303,7 +304,7 @@ app.get("/delete-Cars/:id",loginrequired,(req,res)=>{
 })
 
 // Bookings Management
-app.get("/admin-manageBookings",loginrequired,(req,res)=>{
+app.get("/admin-manageBookings",checkAdmin,(req,res)=>{
     EventDetail.find((err, data) =>{
         if(err){
             console.log("Error in retriving data :" + err);
@@ -337,7 +338,7 @@ app.get("/admin-manageBookings",loginrequired,(req,res)=>{
     })
 
 // Manage FeedBacks
-app.get("/admin-managefeedbacks",loginrequired,(req,res)=>{
+app.get("/admin-managefeedbacks",checkAdmin,(req,res)=>{
         User.find((err, data)=>{
             if(err){
                 console.log("Error in retriving data :" + err);
@@ -352,7 +353,7 @@ app.get("/admin-managefeedbacks",loginrequired,(req,res)=>{
             }
     }).lean()
 })
-app.get("/delete-feedback/:id",(req,res)=>{
+app.get("/delete-feedback/:id",checkAdmin,(req,res)=>{
     User.findByIdAndRemove(req.params.id,(err, data)=>{
         if(!err){
             res.redirect("/admin-managefeedbacks");
@@ -825,12 +826,7 @@ app.post("/login",verifyEmail, async (req, res) => {
     });
 
     if(isMatch){
-        if(useremail.role =='user'){
             res.redirect("/index1");
-        }
-        else if (useremail.role == 'Admin'){
-            res.redirect('/admin-manageuser')
-        }
         
 
 }else{
