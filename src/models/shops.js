@@ -42,11 +42,12 @@ const shopSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    distance:{
-        type:Number,
-        required:true
-    },
     Banner_img:{
+        type:String,
+        required:true
+
+    },
+    what_includes:{
         type:String,
         required:true
 
@@ -99,7 +100,7 @@ const shopSchema = new mongoose.Schema({
 	},
 	createdAt: {
 		type: Date,
-        default:Date.now
+        default:Date.now()
 	},
 	status: {
 		type: String

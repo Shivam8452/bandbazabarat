@@ -58,7 +58,11 @@ const partials_path = path.join(__dirname, "../templates/partials");
 
 
 
-
+// razorpay integration with shops
+let razorPayInstance = new Razorpay({
+	key_id: process.env.RAZORPAY_ID,
+	key_secret: process.env.RAZORPAY_SECRET
+})
 
 let mongoStore = new MongoDbstore({
     mongooseConnection: mongoose.connection,
@@ -494,7 +498,7 @@ app.post("/bookNow/:id",loginrequired, async(req,res)=>{
         }
         razorPayInstance.orders.create(params)
         .then(async (response) => {
-        const razorpayKeyId = process.e     
+        const razorpayKeyId = process.env.RAZORPAY_ID     
         const book = new EventDetail({
             user:req.user,
             cart:shop,
@@ -591,7 +595,7 @@ app.post("/BookResort/:id",loginrequired, async(req,res)=>{
         }
         razorPayInstance.orders.create(params)
         .then(async (response) => {
-        const razorpayKeyId = process.e     
+        const razorpayKeyId = process.env.RAZORPAY_ID     
         const book = new EventDetail({
             user:req.user,
             cart:shop,
@@ -890,11 +894,7 @@ var multipleUpload = upload.fields([{name: "img_proof" ,maxCount: 1}, {name: "Ba
 
 
 
-// razorpay integration with shops
-let razorPayInstance = new Razorpay({
-	key_id: process.env.RAZORPAY_ID,
-	key_secret: process.env.RAZORPAY_SECRET
-})
+
 
 
 // add shops
@@ -919,8 +919,8 @@ app.post("/partner",multipleUpload,loginrequired, async (req, res) =>{
             shop_name:req.body.shop_name,
             price:req.body. price,
             type:req.body.type,
-            distance:req.body.distance,
             Banner_img:req.files.Banner_img[0].originalname,
+            what_includes:req.body.what_includes,
             bank_name:req.body.bank_name,
             branch:req.body.branch,
             ac_no:req.body.ac_no,
@@ -1100,7 +1100,9 @@ app.post("/Verify-Shop",singleupload,async(req,res)=>{
             price:req.body.price,
             type:req.body.type,
             address:req.body.address,
+            what_includes:req.body.what_includes,
             shop_image:req.file.originalname,
+            username:req.body.username,
             password:req.body.password
         });
         await verifiedData.save();
@@ -1255,10 +1257,10 @@ app.get('/subadmin/login',(req,res)=>{
 })
 app.post("/subadmin/login", async (req, res) => {
     try{
-     const email = req.body.email;
+     const username = req.body.username;
      const password = req.body.password;
     
-    const useremail = await VerifiedShop.findOne({email:email});
+    const useremail = await VerifiedShop.findOne({username:username});
     const isMatch = await bcrypt.compare(password, useremail.password);
     
 
@@ -1278,7 +1280,7 @@ app.post("/subadmin/login", async (req, res) => {
         type: 'Warning',
         intro: 'Invalid login details'
     }
-    res.redirect("/login")
+    res.redirect("/subadmin/login")
 }
    } catch(error){
     res.status(400).send("Invalid");

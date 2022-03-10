@@ -17,11 +17,19 @@ const VerifiedShopSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    what_includes:{
+        type:String,
+        required:true
+    },
     type:{
         type: String, 
         required:true
     },
     address:{
+        type:String,
+        required:true
+    },
+    username:{
         type:String,
         required:true
     },
