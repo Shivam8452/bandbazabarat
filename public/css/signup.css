@@ -215,10 +215,15 @@ form label input:focus{
     box-shadow: inset 5px 5px 10px #cbced1,
     inset -5px -5px 10px #FFFFFF;
 }
+.address{
+    width: 100%;
+    display: flex;justify-content: center;
+}
 .checkbox{
     margin: 20px 6rem;
     display: flex;
     align-items: center;
+    
     width: 100%;
 
 }

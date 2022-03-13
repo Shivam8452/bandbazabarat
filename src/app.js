@@ -721,6 +721,7 @@ app.post("/register", async (req,res) =>{
                 isVerified: false,
                 Password : Password,
                 ConfirmPassword : cPassword,
+                address: req.body.address,
                 termsprivacy:req.body.termsprivacy
             })
 
