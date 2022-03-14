@@ -370,7 +370,7 @@ app.get("/delete-feedback/:id",checkAdmin,(req,res)=>{
 
 
 // cart handling
-app.get("/services", (req, res) => {
+app.get("/services",loginrequired,(req, res) => {
     VerifiedShop.find((err, data) =>{
         if(err){
             console.log("Error in retriving data :" + err);
@@ -385,7 +385,8 @@ app.get("/services", (req, res) => {
                else{
                 res.render("services",{
                     services: data,
-                    doc:doc
+                    doc:doc,
+                    user:req.user
                 });
 
             }

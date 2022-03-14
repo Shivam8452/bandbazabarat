@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 </head>
 <body>
+    <section id="nav">
     <div class="search">
     <form class="form-search">
         <i class="fa fa-search"></i>
@@ -25,7 +26,8 @@
 <div class="box">
     <input type="date" name="mydate" id="mydate1"  title="mm/dd/yyyy" class="input" >
 </div>
-
+</section>
+<input type="hidden" value="{{user.address}}" id="address">
 <div class="container">
   <!--Product Grid-->
   <div id="div1">
@@ -36,6 +38,7 @@
           <img src="https://firebasestorage.googleapis.com/v0/b/bandbajabarat-684ea.appspot.com/o/uploads%2F{{this.shop_image}}?alt=media">
        <h3>{{shop.name}}</h3>    
             <p>&#8377 {{shop.price}} /-</p>
+            <input type="hidden" id="{{shop._id}}1" value="{{shop.address}}">
             <div class="unava">
                 <div class="border">
                 <h1>Unavailable</h1>
@@ -57,25 +60,43 @@
      </section> 
   </div>
 </div>
+<section class="absent" id="absent">
+<main id="main">
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <div class="logo"></div>
+        <span>BandBajaBarat <br>Event Management Company</span>
+      </div>
+      <div class="content">
+        <h1><span>We're</span><br><span>coming soon!</span></h1>
+        <p class="text">No Services available on your address! Try changing your address but it will charge you extra depending on owner</p>
+        <div class="contact">
+          <div class="social-links">
+            <p>Connect with us on social media for updates: </p>
+            <ul class="social-ul">
+              <li class="social-li">
+                <span class="li-logo"><i class="fa fa-facebook"></i></span>
+              </li>
+              <li class="social-li">
+                <span class="li-logo"><i class="fa fa-twitter"></i></span>
+              </li>
+              <li class="social-li">
+                <span class="li-logo"><i class="fa fa-instagram"></i></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="reference">Image reference: Image from Lorem Picsum by Arvee Marie</p>
+</main>
+</section>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script src="/js/nameSearch.js"></script>
-<script src="/js/location.js"></script> 
-<script>
-   var date = new Date();
-   var tdate = date.getDate();
-   var month = date.getMonth() + 1;
-   if(tdate < 10){
-       tdate = '0'+ tdate
-   }
-   if(month < 10){
-       month = '0' + month
-   }
-   var year = date.getUTCFullYear();
-   var mindate = year + "-" + month + "-" + tdate
-   document.getElementById('mydate1').setAttribute('min',mindate)
-   document.getElementById('mydate1').value = mindate
-</script>   
+<script src="/js/mindate.js"></script>   
 <script>
     {{#each doc as |val|}}
     {{#ifCond val.status "paid"}}
@@ -143,8 +164,26 @@ function filterProducts(e) {
         }
     })
 }
+</script>
+<script>
+function isMatching(a, b)
+{
+  return new RegExp("\\b(" + a.match(/\w+/g).join('|') + ")\\b", "gi").test(b);
+}
 
-
+ var str1 = document.getElementById('address').value
+ {{#each  services as |shop|}}
+ var str2 = document.getElementById('{{shop._id}}1').value
+ console.log(isMatching(str1,str2))
+ if(isMatching(str1,str2)){
+     document.getElementById('{{shop._id}}').style.display ='block'
+     document.getElementById('absent').style.display = 'none'
+ }else
+ {
+     document.getElementById('{{shop._id}}').style.display ='none'
+     document.getElementById('absent').style.display = 'flex'
+ }
+ {{/each}}
 </script>
 </body>
 </html>
