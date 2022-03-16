@@ -60,38 +60,7 @@
      </section> 
   </div>
 </div>
-<section class="absent" id="absent">
-<main id="main">
-  <div class="container">
-    <div class="card">
-      <div class="header">
-        <div class="logo"></div>
-        <span>BandBajaBarat <br>Event Management Company</span>
-      </div>
-      <div class="content">
-        <h1><span>We're</span><br><span>coming soon!</span></h1>
-        <p class="text">No Services available on your address! Try changing your address but it will charge you extra depending on owner</p>
-        <div class="contact">
-          <div class="social-links">
-            <p>Connect with us on social media for updates: </p>
-            <ul class="social-ul">
-              <li class="social-li">
-                <span class="li-logo"><i class="fa fa-facebook"></i></span>
-              </li>
-              <li class="social-li">
-                <span class="li-logo"><i class="fa fa-twitter"></i></span>
-              </li>
-              <li class="social-li">
-                <span class="li-logo"><i class="fa fa-instagram"></i></span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
-</section>
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script src="/js/nameSearch.js"></script>
@@ -152,11 +121,12 @@ search.addEventListener("keyup", filterProducts);
 
 function filterProducts(e) {
     const text = e.target.value.toLowerCase();
-    
     // console.log(productName[0]);
     productName.forEach(function(product) {
+      
         const item = product.firstChild.textContent;
         if (item.toLowerCase().indexOf(text) != -1) {
+      
             product.parentElement.style.display = "block"
         } else {
             product.parentElement.style.display = "none"
@@ -173,14 +143,13 @@ function isMatching(a, b)
  var str1 = document.getElementById('address').value
  {{#each  services as |shop|}}
  var str2 = document.getElementById('{{shop._id}}1').value
- console.log(isMatching(str1,str2))
- if(isMatching(str1,str2)){
-     document.getElementById('{{shop._id}}').style.display ='block'
+ if(!isMatching(str1,str2)){
      document.getElementById('absent').style.display = 'none'
+     document.getElementById('{{shop._id}}').style.display ='none'
  }else
  {
-     document.getElementById('{{shop._id}}').style.display ='none'
-     document.getElementById('absent').style.display = 'flex'
+     document.getElementById('{{shop._id}}').style.display ='block'
+     
  }
  {{/each}}
 </script>
