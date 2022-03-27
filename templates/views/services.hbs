@@ -88,18 +88,18 @@
         {
             {{#each  services as |shop|}} 
                  var shopElement = document.getElementById("{{shop._id}}")  
-                 shopElement.childNodes[7].style.display="none"
-                 shopElement.childNodes[9].style.display='flex'
+                 shopElement.childNodes[9].style.display="none"
+                 shopElement.childNodes[11].style.display='flex'
             {{/each}}
             
-            {{#each doc as |val|}}
+    {{#each doc as |val|}}
     {{#ifCond val.status "paid"}}
     
     var input = document.getElementById('mydate1').value
       if(input == '{{val.event_date}}'){
         var shopElement = document.getElementById("{{val.cart._id}}")        
-        shopElement.childNodes[7].style.display="unset"
-        shopElement.childNodes[9].style.display="none"
+        shopElement.childNodes[9].style.display="unset"
+        shopElement.childNodes[11].style.display="none"
 
         //shopElement.childNodes[9]
       }
