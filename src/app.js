@@ -397,7 +397,7 @@ app.get("/services",loginrequired,(req, res) => {
     })
 });
 
-app.get("/Cars", (req, res) => {
+app.get("/Cars",loginrequired, (req, res) => {
     Cars.find((err, data) =>{
         if(err){
             console.log("Error in retriving data :" + err);
@@ -417,7 +417,8 @@ app.get("/Cars", (req, res) => {
                 })
                 res.render("Cars",{
                     services: data,
-                    doc:doc
+                    doc:doc,
+                    user:req.user
                 });
 
             }

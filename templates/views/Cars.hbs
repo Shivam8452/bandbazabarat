@@ -35,7 +35,7 @@
         <h1>Cars</h1>
     </div>
 
-
+<input type="hidden" value="{{user.address}}" id="address1">
 <div class="container">
   <!--Product Grid-->
   <div id="div1">
@@ -46,6 +46,7 @@
          <img src="https://firebasestorage.googleapis.com/v0/b/bandbajabarat-684ea.appspot.com/o/uploads%2F{{shop.Car_image}}?alt=media">
        <h3>{{shop.name}}</h3>    
             <p>&#8377 {{shop.price}} /-</p>
+            <input type="hidden" id="{{shop._id}}1" value="{{shop.address}}">
 <div class="btn-group">
  <a href="/CarDetail/{{shop._id}}" class="btn"> View Detail <i class="fa fa-eye" aria-hidden="true"></i></a>
  <a href="/add-to-cart/{{shop._id}}" class="btn"> Add to List <i class="fa fa-book" aria-hidden="true"></i></a>
@@ -59,20 +60,28 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script>
+     function isMatching(a, b)
+{
+  return new RegExp("\\b(" + a.match(/\w+/g).join('|') + ")\\b", "gi").test(b);
+}
     const search = document.getElementById("search1");
 const productName = document.querySelectorAll(".prod-grid h3");
-
 // A BETTER WAY TO FILTER THROUGH THE PRODUCTS
 search.addEventListener("keyup", filterProducts);
-
-
 function filterProducts(e) {
     const text = e.target.value.toLowerCase();
-    
     // console.log(productName[0]);
     productName.forEach(function(product) {
+      var str1 = document.getElementById('address1').value
+ {{#each  services as |shop|}}
+ var str2 = document.getElementById('{{shop._id}}1').value
+ if(!isMatching(str1,str2)){
+     document.getElementById('{{shop._id}}').style.display ='none'
+ }
+ {{/each}}
         const item = product.firstChild.textContent;
         if (item.toLowerCase().indexOf(text) != -1) {
+      
             product.parentElement.style.display = "block"
         } else {
             product.parentElement.style.display = "none"
@@ -80,7 +89,20 @@ function filterProducts(e) {
     })
 }
 
+</script>
+<script>
+    function isMatching(a, b)
+{
+  return new RegExp("\\b(" + a.match(/\w+/g).join('|') + ")\\b", "gi").test(b);
+}
 
+ var str1 = document.getElementById('address1').value
+ {{#each  services as |shop|}}
+ var str2 = document.getElementById('{{shop._id}}1').value
+ if(!isMatching(str1,str2)){
+     document.getElementById('{{shop._id}}').style.display ='none'
+ }
+ {{/each}}
 </script>
 <script>
         setTimeout(function(){
