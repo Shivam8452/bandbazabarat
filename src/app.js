@@ -833,7 +833,7 @@ app.post("/login",verifyEmail, async (req, res) => {
     });
 
     if(isMatch){
-            res.redirect("/index1");
+            res.redirect("/");
         
 
 }else{
@@ -866,7 +866,7 @@ app.post("/index1", async (req, res) =>{
     try{
         const userData = new User(req.body);
         await userData.save();
-        res.redirect("/index1");
+        res.redirect("/");
     } catch(error){
         res.status(500).send(error);
     }
