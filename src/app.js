@@ -460,7 +460,7 @@ app.get("/remove/:id", (req,res)=>{
     req.session.cart = cart;
     res.redirect('/cart');
 })
-app.get("/cart", (req,res) =>{
+app.get("/cart",loginrequired, (req,res) =>{
     if(!req.session.cart){
         return res.render("cart",{services: null})
     }
@@ -669,7 +669,7 @@ app.post('/ResortBooking/verify', async function(req, res, next) {
 
 
 // Product Detail page
-app.get("/ShopDetail/:id",(req,res)=>{
+app.get("/ShopDetail/:id",loginrequired,(req,res)=>{
     var serviceId = req.params.id;
     VerifiedShop.findById(serviceId, function(err, shop){
         if(err){
@@ -678,7 +678,7 @@ app.get("/ShopDetail/:id",(req,res)=>{
         res.render("shopdetail",{services: shop})
     })
 })
-app.get("/CarDetail/:id",(req,res)=>{
+app.get("/CarDetail/:id",loginrequired,(req,res)=>{
     var serviceId = req.params.id;
     Cars.findById(serviceId, function(err, shop){
         if(err){

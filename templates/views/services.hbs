@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 </head>
-<body>
+<body onload="myFunction()">
+  <div id="loading"></div>
     <section id="nav">
     <div class="search">
     <form class="form-search">
         <i class="fa fa-search"></i>
             <input type="text" name="mysearch" id="mysearch1" placeholder="search by name here">
-            {{!-- <button class="search-btn" id="search-btn">Search</button>            --}}
         </form>
     </div>
 <div class="section-heading">
@@ -60,11 +60,36 @@
      </section> 
   </div>
 </div>
+<div id="none" class="none">
+<article class="card card__content">
+  <figure class="header">
+    <figcaption class="header__caption" role="presentation">
+      <span class="header__tag tag--secondary"><span id="tag">Band Baja</span>Barat</span>
+    </figcaption>
+  </figure>
+  <main class="card__body">
+    <h1 class="title--primary">We are not here yet</h1>
+    <h2 class="title--secondary">Or no services found!</h2>
+    <p class="description">Try changing address but it will cost you extra, depending on the service provider</p>
+  </main>
+  <footer class="footer">
+    <div class="expand__indicator">
+      <span class="link__text">See more</span>
+    </div>
+  </footer>
+</article>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script src="/js/nameSearch.js"></script>
 <script src="/js/mindate.js"></script>   
+<script>
+    var preloader = document.getElementById("loading");
+    function myFunction(){
+			preloader.style.display = 'none';
+		};
+</script>
 <script>
     {{#each doc as |val|}}
     {{#ifCond val.status "paid"}}
@@ -154,6 +179,26 @@ function isMatching(a, b)
      document.getElementById('{{shop._id}}').style.display ='none'
  }
  {{/each}}
+</script>
+<script>
+  const areAllDivsDisplayNone = (divs) => {
+  let allDisplayNone = true;
+  for (let i in divs) {
+    if (divs[i].style.display !== 'none') {
+      allDisplayNone = false;
+      break;
+    }
+  }
+  return allDisplayNone;
+};
+const els = Array.from(document.querySelectorAll('.prod-grid'));
+const results = areAllDivsDisplayNone(els);
+
+if (results) {
+  console.log('Results!');
+  document.getElementById('none').style.display = 'flex'
+  document.getElementById('nav').style.display='none'
+}
 </script>
 </body>
 </html>
