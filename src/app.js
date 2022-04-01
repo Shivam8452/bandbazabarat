@@ -117,12 +117,12 @@ handlebars.registerHelper('checkIf', function(v1, v2, options) {
 
 
 
-app.get("/",(req, res) => {
-    res.render("index")
-});
-app.get("/index1",loginrequired, (req, res) => {
+app.get("/",loginrequired,(req, res) => {
     res.render("index1")
 });
+// app.get("/index1",loginrequired, (req, res) => {
+//     res.render("index1")
+// });
 app.get("/profile",loginrequired,(req,res)=>{
     EventDetail.find({user: req.user}, function(err, data){
         if(err){
