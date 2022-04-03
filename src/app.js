@@ -399,7 +399,7 @@ app.get("/services",loginrequired,(req, res) => {
                              user:req.user,
                              pagination: {
                                 page: req.query.page || 1,
-                                pageCount: Math.ceil(count/perPage) 
+                                pageCount: Math.ceil(count/perPage) ,
                             }, 
                          });
          

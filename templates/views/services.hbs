@@ -65,9 +65,6 @@
     {{#paginate pagination type="previous"}}
       <li {{#if disabled}}class="disabled" {{/if}} class="pageNumber"><a href="?page={{n}}">&larr;Prev</a></li>
     {{/paginate}}
-    {{#paginate pagination type="middle" limit= pagination.pageCount}}
-      <li {{#if active}}class="active"{{/if}} class="pageNumber"><a href="?page={{n}}">{{n}}</a></li>
-    {{/paginate}}
     {{#paginate pagination type="next"}}
       <li {{#if disabled}}class="disabled"{{/if}} class="pageNumber"><a href="?page={{n}}">Next&rarr;</a></li>
     {{/paginate}}
