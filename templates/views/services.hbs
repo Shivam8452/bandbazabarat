@@ -60,16 +60,6 @@
      </section> 
   </div>
 </div>
-<div id="paginate" class="pagination pagination-centered">
-  <ul>
-    {{#paginate pagination type="previous"}}
-      <li {{#if disabled}}class="disabled" {{/if}} class="pageNumber"><a href="?page={{n}}">&larr;Prev</a></li>
-    {{/paginate}}
-    {{#paginate pagination type="next"}}
-      <li {{#if disabled}}class="disabled"{{/if}} class="pageNumber"><a href="?page={{n}}">Next&rarr;</a></li>
-    {{/paginate}}
-  </ul>
-</div>
 <div id="none" class="none">
 <article class="card card__content">
   <figure class="header">

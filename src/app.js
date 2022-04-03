@@ -16,8 +16,7 @@ const MongoDbstore = require("connect-mongo")(session);
 const Razorpay = require('razorpay')
 const { nanoid } = require("nanoid");
 const expressHbs = require('express-handlebars');
-const FirebaseStorage = require('multer-firebase-storage');
-const paginate = require('handlebars-paginate')
+const FirebaseStorage = require('multer-firebase-storage')
 
 
 
@@ -107,13 +106,12 @@ handlebars.registerHelper('ifCond', function(v1, v2, options) {
     return options.inverse(this);
 })
 handlebars.registerHelper('checkIf', function(v1, v2, options) {
-    if(v1 !== v2) {   
+    if(v1 != v2) {   
     return options.fn(this);
       
     }
     return options.inverse(this);
 })
-handlebars.registerHelper('paginate',paginate)
 
 
 
@@ -373,44 +371,30 @@ app.get("/delete-feedback/:id",checkAdmin,(req,res)=>{
 
 // cart handling
 app.get("/services",loginrequired,(req, res) => {
-    var perPage = 20
-  var page = req.query.page
     VerifiedShop.find((err, data) =>{
         if(err){
             console.log("Error in retriving data :" + err);
            
         }
         else{
-            VerifiedShop.count((error,count)=>{
-                if(error){
-                    console.log("Error in retriving data :" + error);
-                }
-                else{
-                    // console.log(count)
-                    EventDetail.find((err,doc)=>{
-                        if(err){
-                         console.log("Error in retriving data :" + err);
-                    
-                        } 
-                        else{
-                         res.render("services",{
-                             services: data,
-                             doc:doc,
-                             user:req.user,
-                             pagination: {
-                                page: req.query.page || 1,
-                                pageCount: Math.ceil(count/perPage) ,
-                            }, 
-                         });
-         
-                     }
-                     })
-                }
+            EventDetail.find((err,doc)=>{
+               if(err){
+                console.log("Error in retriving data :" + err);
+           
+               } 
+               else{
+                res.render("services",{
+                    services: data,
+                    doc:doc,
+                    user:req.user
+                });
+
+            }
             })
             
             
         }
-    }).skip((perPage * page) - perPage).limit(perPage)
+    })
 });
 
 app.get("/Cars",loginrequired, (req, res) => {
