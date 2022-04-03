@@ -25,6 +25,7 @@
     "express-handlebars": "^6.0.2",
     "express-session": "^1.17.2",
     "express-validator": "^6.14.0",
+    "handlebars-paginate": "^0.1.0",
     "hbs": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
     "mailgun-js": "^0.22.0",
@@ -41,6 +42,6 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
-    "handlebars": "^4.5.0"
+    "handlebars": "^4.7.7"
   }
 }

@@ -60,6 +60,19 @@
      </section> 
   </div>
 </div>
+<div id="paginate" class="pagination pagination-centered">
+  <ul>
+    {{#paginate pagination type="previous"}}
+      <li {{#if disabled}}class="disabled" {{/if}} class="pageNumber"><a href="?page={{n}}">&larr;Prev</a></li>
+    {{/paginate}}
+    {{#paginate pagination type="middle" limit= pagination.pageCount}}
+      <li {{#if active}}class="active"{{/if}} class="pageNumber"><a href="?page={{n}}">{{n}}</a></li>
+    {{/paginate}}
+    {{#paginate pagination type="next"}}
+      <li {{#if disabled}}class="disabled"{{/if}} class="pageNumber"><a href="?page={{n}}">Next&rarr;</a></li>
+    {{/paginate}}
+  </ul>
+</div>
 <div id="none" class="none">
 <article class="card card__content">
   <figure class="header">
@@ -97,8 +110,8 @@
     //localStorage.getItem('txtValue',input)
       if(input == '{{val.event_date}}'){
     var shopElement = document.getElementById("{{val.cart._id}}")
-    shopElement.childNodes[7].style.display="unset"
-    shopElement.childNodes[9].style.display="none"
+    shopElement.childNodes[9].style.display="unset"
+    shopElement.childNodes[11].style.display="none"
 
     //shopElement.childNodes[9].remove() 
       }
@@ -198,6 +211,7 @@ if (results) {
   console.log('Results!');
   document.getElementById('none').style.display = 'flex'
   document.getElementById('nav').style.display='none'
+  document.getElementById('paginate').style.display='none'
 }
 </script>
 </body>
