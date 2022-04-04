@@ -371,6 +371,12 @@ app.get("/delete-feedback/:id",checkAdmin,(req,res)=>{
 
 // cart handling
 app.get("/services",loginrequired,(req, res) => {
+function isMatching(a, b)
+{
+  return new RegExp("\\b(" + a.match(/\w+/g).join('|') + ")\\b", "gi").test(b);
+}
+let str1 = req.user.address
+
     VerifiedShop.find((err, data) =>{
         if(err){
             console.log("Error in retriving data :" + err);
@@ -383,8 +389,15 @@ app.get("/services",loginrequired,(req, res) => {
            
                } 
                else{
+                let arrayToReturn = []
+                data.forEach(element => {
+                    if(isMatching(str1,element.address)){
+                        arrayToReturn.push(element)
+                    }                                        
+                });
+                // console.log(arrayToReturn)
                 res.render("services",{
-                    services: data,
+                    services: arrayToReturn,
                     doc:doc,
                     user:req.user
                 });
