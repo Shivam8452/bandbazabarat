@@ -3,11 +3,6 @@ const validator = require("validator");
 
 
 const userSchema = mongoose.Schema({
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-		ref:"Register",
-        required:true
-	},
     name:{
         type:String,
         required:true,

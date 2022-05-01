@@ -50,6 +50,7 @@
         <li>
           <a href="#quick-links">Quick Links</a>
         </li>
+            {{#if loggedin}}
         <li>
           <a href="#!">Profile</a>
           <ul class="navbar-dropdown">
@@ -62,6 +63,18 @@
             <li>
               <a href="/logout">logout</a>
             </li>
+            {{else}}
+            <li>
+             <a href="#!">login/signup</a>
+          <ul class="navbar-dropdown">
+            <li>
+              <a href="/login">Login</a>
+            </li>
+            <li>
+              <a href="/register">SignUp</a>
+            </li>
+            </li>
+            {{/if}}
           </ul>
         </li>
       </ul>

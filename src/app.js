@@ -117,12 +117,10 @@ handlebars.registerHelper('checkIf', function(v1, v2, options) {
 
 
 
-app.get("/",loginrequired,(req, res) => {
-    res.render("index1")
+app.get("/",(req, res) => {
+    let loggedin = req.cookies.jwt || null
+    res.render("index1",{loggedin:loggedin})
 });
-// app.get("/index1",loginrequired, (req, res) => {
-//     res.render("index1")
-// });
 app.get("/profile",loginrequired,(req,res)=>{
     EventDetail.find({user: req.user}, function(err, data){
         if(err){
@@ -188,7 +186,7 @@ app.get("/logout",loginrequired, async(req,res)=>{
             return currentelem.token != req.token
         })
         await req.user.save();
-        res.render("index")
+        res.redirect("/login")
     } catch (error) {
         res.status(500).send(error)
     }
@@ -865,16 +863,6 @@ app.post("/login",verifyEmail, async (req, res) => {
 
 
 // feedback
-app.post("/index", async (req, res) =>{
-    try{
-        const userData = new User(req.body);
-        await userData.save();
-        res.redirect("/index");
-    } catch(error){
-        res.status(500).send(error);
-    }
-
-})
 app.post("/index1", async (req, res) =>{
     try{
         const userData = new User(req.body);
