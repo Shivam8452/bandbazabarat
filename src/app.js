@@ -860,6 +860,15 @@ app.post("/login",verifyEmail, async (req, res) => {
    }
 });
 
+// change user address
+app.post("/address/change", (req,res)=>{
+    Register.updateOne({_id:req.body.userId},{address:req.body.address},(err,data)=>{
+        if(err){
+            res.redirect('/profile')
+        }
+        res.redirect('/profile')
+    })
+})
 
 
 // feedback

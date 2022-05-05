@@ -224,6 +224,52 @@ body{
     background-color: #f0f0f0;
     font-size: 16px;
 }
+.editable-cell{
+    padding: 10px;
+  background: #F1F1F1;
+  margin: 0px;
+  color: #545454;
+  width: 100%;
+    transition: .3s all linear
+}
+
+.editable-field{
+    display: flex;
+  justify-content: space-between
+}
+
+.editable-input{
+    border: none;
+  font-size: inherit;
+  background: inherit;
+  color: inherit;
+  transition: .3s all linear;
+  width: 300px;
+}
+.editable-input:focus{
+    outline: none;
+    background: white;
+    color: #545454
+}
+    
+
+.edit-button{
+    cursor: pointer;
+  font-size: 5em;
+  position: relative;
+  top: 5px;
+}
+  
+.hide{
+    visibility: hidden !important
+}
+    
+.editing{
+    background: #E9F5FA;
+color: #f1f1f1;
+box-shadow: -2px 0px 0px #0081C6
+}
+  
 @media(max-width:410px){
     .container{
         width: 300px;
