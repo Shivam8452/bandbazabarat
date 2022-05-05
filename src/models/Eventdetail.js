@@ -58,7 +58,7 @@ const eventDetailSchema = new mongoose.Schema({
 	},
 	createdAt: {
 		type: Date,
-		default:Date.now()
+		default: Date.now
 	},
 	order_status:{
 		type:String,

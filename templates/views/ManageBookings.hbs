@@ -117,6 +117,7 @@
 								<th>Event Type</th>
 								<th>From Address</th>
 								<th>To Address</th>
+								<th>Change Status</th>
 								<th>Status</th>
 							</tr>
 						</thead>
@@ -159,8 +160,9 @@
 										<option value="Completed">Completed</option>
 									</select>
 									</form>
-						
+						           
 								</td>
+								<td>{{this.order_status}}</td>
 							</tr>
                             {{/ifCond}}
                             {{/each}}
@@ -186,6 +188,7 @@
 								<th>Event Type</th>
 								<th>From Address</th>
 								<th>To Address</th>
+								<th>Change Status</th>
 								<th>Status</th>
 							</tr>
 						</thead>
@@ -234,6 +237,7 @@
 									</select>
 									</form>
 								</td>
+								<td>{{this.order_status}}</td>
 							</tr>
                             {{/ifCond}}
                             {{/each}}
