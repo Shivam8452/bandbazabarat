@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,75 +11,78 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <title>SignUp</title>
 </head>
+
 <body>
     {{#if message}}
     <div class="{{message.type}} show">
         <span class="fa fa-exclamation-circle"></span>
         <span class="msg">{{message.type}}:{{message.intro}}</span>
         <span class="close-btn">
-            <span  class="fa fa-times" onclick='Close()'></span>
+            <span class="fa fa-times" onclick='Close()'></span>
         </span>
     </div>
     {{/if}}
-    
-<div class="body">
-    <div class="signup">
-        <h3>Create an Account</h3>
-        <form action="/register" method="post">
-            <label for="Name">
-                <span>name</span>
-                <input type="text" name="Name" placeholder="name" required>
-            </label>
-            <label for="Email">
-                <span>email</span>
-                <input type="email" name="Email" placeholder="user123@gmail.com" required>
-            </label>
-            <label for="Password">
-                <span>password</span>
-                <input type="password" name="Password" placeholder="password" required>
-            </label>
-            <label for="ConfirmPassword">
-                <span>password</span>
-                <input type="password" name="ConfirmPassword" placeholder="confirm password" required>
-            </label>
-            <div class="address">
-            <label for="address">
-                <span>address</span>
-                <input type="text" name="address" placeholder="address" required>
-            </label>
-            </div>
-            <div class="chackbox">
-                <input type="checkbox" name="termsprivacy" value="I accept" required>
-                I accept the <a href="/privacy&policy">privacy policy</a> & <a href="/terms&conditions">terms & conditions</a>
-            </div>
-            <div class="btn">
-                <button type="submit">Get started</button>
-            </div>
-        </form>
-        <div class="or">OR</div>
-        
-        <a href="/login"><button class="login">Login</button></a>
-    </div>
+
+    <div class="body">
+        <div class="signup">
+            <h3>Create an Account</h3>
+            <form action="/register" method="post">
+                <label for="Name">
+                    <span>name</span>
+                    <input type="text" name="Name" placeholder="name" required>
+                </label>
+                <label for="Email">
+                    <span>email</span>
+                    <input type="email" name="Email" placeholder="user123@gmail.com" required>
+                </label>
+                <label for="Password">
+                    <span>password</span>
+                    <input type="password" name="Password" placeholder="password" required>
+                </label>
+                <label for="ConfirmPassword">
+                    <span>password</span>
+                    <input type="password" name="ConfirmPassword" placeholder="confirm password" required>
+                </label>
+                <div class="address">
+                    <label for="address">
+                        <span>address</span>
+                        <input type="text" name="address" placeholder="address" required>
+                    </label>
+                </div>
+                <div class="chackbox">
+                    <input type="checkbox" name="termsprivacy" value="I accept" required>
+                    I accept the <a href="/privacy&policy">privacy policy</a> & <a href="/terms&conditions">terms &
+                        conditions</a>
+                </div>
+                <div class="btn">
+                    <button type="submit">Get started</button>
+                </div>
+            </form>
+            <div class="or">OR</div>
+
+            <a href="/login"><button class="login">Login</button></a>
+        </div>
     </div>
 </body>
 <script>
-    setTimeout(function(){
+    setTimeout(function () {
         $('.Warning').removeClass("show");
         $('.Warning').addClass('hide')
 
-    },5000)
-    $('.close-btn').click(function(){
+    }, 5000)
+    $('.close-btn').click(function () {
         $('.Warning').addClass("hide");
         $('.Warning').removesClass('show')
     })
-    setTimeout(function(){
+    setTimeout(function () {
         $('.Success').removeClass("show");
         $('.Success').addClass('hide')
 
-    },5000)
-    $('.close-btn').click(function(){
+    }, 5000)
+    $('.close-btn').click(function () {
         $('.Success').addClass("hide");
         $('.Success').removesClass('show')
     })
 </script>
+
 </html>
