@@ -116,7 +116,7 @@ handlebars.registerHelper('checkIf', function(v1, v2, options) {
 
 
 // sitemap
-router.get("/sitemap.xml", function(req, res, next){
+app.get("/sitemap.xml", function(req, res, next){
     res.sendFile(__dirname + '../public/sitemap.xml'); 
   });
 
