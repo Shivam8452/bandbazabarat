@@ -204,7 +204,6 @@ app.get("/partner",loginrequired, (req, res) => {
     res.render("partner");
 });
 
-
 // admin setup
 
 // user
@@ -811,7 +810,7 @@ app.get('/verify-email', async (req, res)=>{
             registerEmployee.emailToken = null
             registerEmployee.isVerified = true
             await registerEmployee.save();
-            res.redirect('login');
+            res.render("emailConfirmed")
         }
         else{
             res.redirect("/register");

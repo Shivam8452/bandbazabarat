@@ -1,0 +1,42 @@
+body{
+    -webkit-font-smoothing:antialiased;
+    font-family: 'Baloo Bhai 2', 'cursive';
+    background-color: #f4f4f4;
+    }
+    html{
+        scroll-behavior: smooth;
+    }
+    /* css reset */
+    *{
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+    }
+    .container{
+        background-color: #35b8e8;
+        height:140px;
+    }
+    
+    .content{
+        max-width: 550px;
+        background-color: #fff;
+        margin: -80px auto 0 auto;
+        padding: 20px 60px 80px 60px;
+    }
+    
+    .head{
+        font-size: 30px;
+        font-weight: 300;
+        margin-top: 20px;
+        text-align: center;
+    }
+    
+    .subhead{
+        box-sizing: border-box;
+        width: 100%;
+    }
+    
+    .subcont{
+        font-size: 18px;
+        text-align: center
+    }
