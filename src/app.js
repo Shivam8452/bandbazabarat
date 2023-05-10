@@ -17,7 +17,7 @@ const Razorpay = require('razorpay')
 const { nanoid } = require("nanoid");
 const expressHbs = require('express-handlebars');
 const FirebaseStorage = require('multer-firebase-storage')
-
+const fast2sms = require('fast-two-sms')
 
 
 
@@ -45,6 +45,7 @@ const res = require("express/lib/response");
 const { handlebars } = require("hbs");
 const { render } = require("express/lib/response");
 const { findById } = require("./models/feedback");
+const { error } = require("console");
 
 
 
@@ -706,17 +707,19 @@ app.get("/CarDetail/:id",loginrequired,(req,res)=>{
 
 
 
-// mail sender
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth:{
-        user: 'jaishrikrishana334@gmail.com',
-        pass : 'oylnfhcqxmgaegfv' 
-    },
-    tls:{
-        rejectUnauthorized:false
-    }
-})
+// // mail sender
+// var transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth:{
+//         user: 'jaishrikrishana334@gmail.com',
+//         pass : 'oylnfhcqxmgaegfv' 
+//     },
+//     tls:{
+//         rejectUnauthorized:false
+//     }
+// })
+
+
 
 
 
@@ -731,7 +734,7 @@ app.post("/register", async (req,res) =>{
 
                             
                 Name : req.body.Name,
-                Email : req.body.Email,
+                Phone : req.body.Phone,
                 emailToken: crypto.randomBytes(64).toString('hex'),
                 isVerified: false,
                 Password : Password,
@@ -750,32 +753,52 @@ app.post("/register", async (req,res) =>{
         
             await registerEmployee.save();
 
-            // send varifiction mail to user
-            var maiOptions = {
-                from:' "verify You email" <noreply@gmail.com>',
-                to: registerEmployee.Email,
-                subject: 'BandBajaBarat -verify your email',
-                html: `<h2> ${registerEmployee.Name}! Thanks for registering </h2>
-                <h4> Please verify your email to continue... </h4>
-                <a href="http://${req.headers.host}/verify-email?token=${registerEmployee.emailToken}"> Click here to verify</a>`
+            var options = {
+                authorization: process.env.FAST_API_KEY,
+                message:'<h2> ${registerEmployee.Name}! Thanks for registering </h2><h4> Please verify your email to continue... </h4><a href="http://${req.headers.host}/verify-email?token=${registerEmployee.emailToken}"> Click here to verify</a>',
+                numbers:[req.body.Phone]
             }
+
+            fast2sms.sendMessage(options).then((response)=>{
+                // response.send("Verfication email is sent to your gmail account")
+                console.log(res)
+                console.log("Verfication email is sent to your gmail account");
+            }).catch((error)=>{
+
+                console.log(error);
+                 req.session.message = {
+                       type: 'Warning',
+                       intro: 'Oops! Something went wrong'
+                 }
+
+            })
+
+            // send varifiction mail to user
+            // var maiOptions = {
+            //     from:' "verify You email" <noreply@gmail.com>',
+            //     to: registerEmployee.Email,
+            //     subject: 'BandBajaBarat -verify your email',
+            //     html: `<h2> ${registerEmployee.Name}! Thanks for registering </h2>
+            //     <h4> Please verify your email to continue... </h4>
+            //     <a href="http://${req.headers.host}/verify-email?token=${registerEmployee.emailToken}"> Click here to verify</a>`
+            // }
 
 
             // sending mail
-            transporter.sendMail(maiOptions, function(error, info){
-                if(error){
-                    console.log(error);
-                    req.session.message = {
-                        type: 'Warning',
-                        intro: 'Oops! Something went wrong'
-                    }
-                }
-                else{
-                    console.log("Verfication email is sent to your gmail account");
+            // transporter.sendMail(maiOptions, function(error, info){
+            //     if(error){
+            //         console.log(error);
+            //         req.session.message = {
+            //             type: 'Warning',
+            //             intro: 'Oops! Something went wrong'
+            //         }
+            //     }
+            //     else{
+            //         console.log("Verfication email is sent to your gmail account");
                     
 
-                }
-            })
+            //     }
+            // })
             req.session.message={
                 type: 'Success',
                 intro: 'Verification email is sent to your gmail'
@@ -832,10 +855,10 @@ app.get('/verify-email', async (req, res)=>{
 // check login
 app.post("/login",verifyEmail, async (req, res) => {
     try{
-     const email = req.body.email;
+     const phone = req.body.phone;
      const password = req.body.password;
     
-    const useremail = await Register.findOne({Email:email});
+    const useremail = await Register.findOne({Phone:phone});
     const isMatch = await bcrypt.compare(password, useremail.Password);
     const token = await useremail.generateAuthToken();
     

@@ -215,6 +215,11 @@ form label input:focus{
     box-shadow: inset 5px 5px 10px #cbced1,
     inset -5px -5px 10px #FFFFFF;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .address{
     width: 100%;
     display: flex;justify-content: center;
@@ -256,4 +261,9 @@ button:hover{
 .or{
     margin: 22px 0px;
     font-weight: bold;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

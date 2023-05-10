@@ -281,7 +281,7 @@ nav ul li ul li a {
     background: url('/images/pic4.jpeg') no-repeat center center/cover;
 }
 .slide:nth-child(6){
-    background: url('/images/img3.jpg') no-repeat center center/cover;
+    background: url('/images/camera.jpg') no-repeat center center/cover;
 }
 
 /* utility classes */

@@ -10,7 +10,7 @@ const employeeSchema = new mongoose.Schema({
     },
 
 
-    Email:{
+    Phone:{
         type:String,
         required:true,
         unique:true
