@@ -755,7 +755,7 @@ app.post("/register", async (req,res) =>{
 
             var options = {
                 authorization: process.env.FAST_API_KEY,
-                message:'<h2> ${registerEmployee.Name}! Thanks for registering </h2><h4> Please verify your email to continue... </h4><a href="http://${req.headers.host}/verify-email?token=${registerEmployee.emailToken}"> Click here to verify</a>',
+                message:`<h2> ${registerEmployee.Name}! Thanks for registering </h2><h4> Please verify your email to continue... </h4><a href="http://${req.headers.host}/verify-email?token=${registerEmployee.emailToken}"> Click here to verify</a>`,
                 numbers:[req.body.Phone]
             }
 
