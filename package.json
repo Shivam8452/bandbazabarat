@@ -26,6 +26,7 @@
     "express-session": "^1.17.2",
     "express-validator": "^6.14.0",
     "fast-two-sms": "^3.0.0",
+    "fast2sms": "^1.0.3",
     "handlebars-paginate": "^0.1.0",
     "hbs": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
