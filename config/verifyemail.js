@@ -4,7 +4,7 @@ const Register = require("../src/models/register");
 
 const verifyEmail = async(req,res,next) =>{
     try{
-        const user = await Register.findOne({ Email : req.body.email});
+        const user = await Register.findOne({ Phone : req.body.phone});
         if(user.isVerified){
         next();
         }
@@ -12,7 +12,7 @@ const verifyEmail = async(req,res,next) =>{
             console.log("Please check your email for verification")
             req.session.message={
                 type: 'Warning',
-                intro: 'Please check your email for verification'
+                intro: 'Please check your Mobile for verification'
             }
             res.redirect("/login")
             
