@@ -753,48 +753,25 @@ app.post("/register", async (req,res) =>{
         
             await registerEmployee.save();
 
-            const accountSid = process.env.TWILIO_ACCOUNT_SID;
-            const authToken = process.env.TWILIO_AUTH_TOKEN;
+            
+            var options = {
+                authorization: process.env.FAST_API_KEY,
+                message:`http://${req.headers.host}/verify-email?token=${registerEmployee.emailToken}`,
+                numbers:[req.body.Phone]
+            }
 
-            const client = require('twilio')(accountSid, authToken);
-                client.messages
-                    .create({
-                    body: `http://${req.headers.host}/verify-email?token=${registerEmployee.emailToken}`,
-                    from: process.env.TWILIO_PHONE_NUMBER,
-                    to: `+91${registerEmployee.Phone}`
-                    })
-                    .then((message) => {
-                        console.log("Verfication link is sent to your phone no");
-                        console.log(message.sid)
-                    })
-                    .catch((error)=>{
-                        console.log(error);
-                        req.session.message = {
-                            type: 'Warning',
-                            intro: 'Oops! Something went wrong'
-                        }
+            fast2sms.sendMessage(options).then((response)=>{
+                // response.send("Verfication email is sent to your gmail account")
+                console.log("Verfication link is sent to your phone no");
+            }).catch((error)=>{
 
-                    })
+                console.log(error);
+                 req.session.message = {
+                       type: 'Warning',
+                       intro: 'Oops! Something went wrong'
+                 }
 
-            // var options = {
-            //     authorization: process.env.FAST_API_KEY,
-            //     message:`http://${req.headers.host}/verify-email?token=${registerEmployee.emailToken}`,
-            //     numbers:[req.body.Phone]
-            // }
-
-            // fast2sms.sendMessage(options).then((response)=>{
-            //     // response.send("Verfication email is sent to your gmail account")
-            //     console.log(res)
-            //     console.log("Verfication link is sent to your phone no");
-            // }).catch((error)=>{
-
-            //     console.log(error);
-            //      req.session.message = {
-            //            type: 'Warning',
-            //            intro: 'Oops! Something went wrong'
-            //      }
-
-            // })
+            })
 
             // send varifiction mail to user
             // var maiOptions = {
