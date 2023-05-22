@@ -762,7 +762,7 @@ app.post("/register", async (req,res) =>{
             fast2sms.sendMessage(options).then((response)=>{
                 // response.send("Verfication email is sent to your gmail account")
                 console.log(res)
-                console.log("Verfication email is sent to your gmail account");
+                console.log("Verfication link is sent to your phone no");
             }).catch((error)=>{
 
                 console.log(error);
@@ -801,7 +801,7 @@ app.post("/register", async (req,res) =>{
             // })
             req.session.message={
                 type: 'Success',
-                intro: 'Verification email is sent to your gmail'
+                intro: 'Verification link is sent to your phone no'
             }
             res.redirect("/login")
             
@@ -818,7 +818,7 @@ app.post("/register", async (req,res) =>{
     } catch (error){
         req.session.message={
             type: 'Warning',
-            intro: 'Email already exists'
+            intro: 'Phone no already exists'
         }
         res.redirect("/register")
     }
