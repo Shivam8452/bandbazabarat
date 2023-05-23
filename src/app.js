@@ -735,13 +735,14 @@ app.post("/register", async (req,res) =>{
                             
                 Name : req.body.Name,
                 Phone : req.body.Phone,
-                emailToken: crypto.randomBytes(64).toString('hex'),
+                emailToken: crypto.randomBytes(48).toString('hex'),
                 isVerified: false,
                 Password : Password,
                 ConfirmPassword : cPassword,
                 address: req.body.address,
                 termsprivacy:req.body.termsprivacy
             })
+             
 
             const token = await registerEmployee.generateAuthToken();
             console.log("the token part" + token)
@@ -759,7 +760,7 @@ app.post("/register", async (req,res) =>{
                 message:`http://${req.headers.host}/verify-email?token=${registerEmployee.emailToken}`,
                 numbers:[req.body.Phone]
             }
-
+    
             fast2sms.sendMessage(options).then((response)=>{
                 // response.send("Verfication email is sent to your gmail account")
                 console.log("Verfication link is sent to your phone no");
