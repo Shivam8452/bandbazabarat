@@ -22,11 +22,6 @@ const employeeSchema = new mongoose.Schema({
         required:true
     },
 
-    ConfirmPassword:{
-        type:String,
-        // required:true
-   
-    },
     address:{
         type:String,
         required:true
@@ -35,14 +30,6 @@ const employeeSchema = new mongoose.Schema({
     termsprivacy:{
         type:String,
         required:true
-    },
-    emailToken:{
-        type:String
-
-    },
-    isVerified:{
-        type:Boolean
-
     },
     role:{
         type:String,
@@ -81,7 +68,7 @@ employeeSchema.pre("save", async function(next){
         console.log(`the current Password is ${this.Password}`);
   this.Password = await bcrypt.hash(this.Password,10);
   console.log(`the current Password is ${this.Password}`);
-this.ConfirmPassword = undefined;
+
 }
     next();
 })

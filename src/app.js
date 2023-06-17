@@ -726,24 +726,18 @@ app.get("/CarDetail/:id", loginrequired, (req, res) => {
 app.post("/register", async (req, res) => {
 
     try {
-        const Password = req.body.Password;
-        const cPassword = req.body.ConfirmPassword;
-        if (Password === cPassword) {
             const registerEmployee = new Register({
 
 
                 Name: req.body.Name,
                 Phone: req.body.Phone,
-                emailToken: crypto.randomBytes(48).toString('hex'),
-                isVerified: false,
-                Password: Password,
-                ConfirmPassword: cPassword,
+                Password: Math.random().toString(36).slice(-8),
                 address: req.body.address,
                 termsprivacy: req.body.termsprivacy
             })
 
-            await registerEmployee.save();
 
+            
 
             // var options = {
             //     authorization: process.env.FAST_API_KEY,
@@ -774,7 +768,8 @@ app.post("/register", async (req, res) => {
             });
 
             request.form({
-                "message": `http://${req.headers.host}/verifyemail?token=${registerEmployee.emailToken}`,
+                "message": `username: ${registerEmployee.Phone}
+                            Password: ${registerEmployee.Password}`,
                 "language": "english",
                 "route": "q",
                 "numbers": `${registerEmployee.Phone}`,
@@ -786,7 +781,7 @@ app.post("/register", async (req, res) => {
                 console.log(res.body);
             });
 
-
+            await registerEmployee.save();
             
 
             // send varifiction mail to user
@@ -821,16 +816,6 @@ app.post("/register", async (req, res) => {
             }
             res.redirect("/login")
 
-
-
-        } else if (Password != cPassword) {
-            req.session.message = {
-                type: 'Warning',
-                intro: 'Password not matching!'
-            }
-            res.redirect("/register")
-
-        }
     } catch (error) {
         console.log(error)
         req.session.message = {
@@ -842,24 +827,24 @@ app.post("/register", async (req, res) => {
 });
 
 
-app.get('/verifyemail', async (req, res) => {
-    try {
-        const token = req.query.token;
-        const registerEmployee = await Register.findOne({ emailToken: token });
-        if (registerEmployee) {
-            registerEmployee.emailToken = null
-            registerEmployee.isVerified = true
-            await registerEmployee.save();
-            res.render("emailConfirmed")
-        }
-        else {
-            res.redirect("/register");
-            console.log("email is not verified");
-        }
-    } catch (err) {
-        console.log(err);
-    }
-})
+// app.get('/verifyemail', async (req, res) => {
+//     try {
+//         const token = req.query.token;
+//         const registerEmployee = await Register.findOne({ emailToken: token });
+//         if (registerEmployee) {
+//             registerEmployee.emailToken = null
+//             registerEmployee.isVerified = true
+//             await registerEmployee.save();
+//             res.render("emailConfirmed")
+//         }
+//         else {
+//             res.redirect("/register");
+//             console.log("email is not verified");
+//         }
+//     } catch (err) {
+//         console.log(err);
+//     }
+// })
 
 
 
@@ -870,7 +855,7 @@ app.get('/verifyemail', async (req, res) => {
 
 
 // check login
-app.post("/login", verifyEmail, async (req, res) => {
+app.post("/login", async (req, res) => {
     try {
         const phone = req.body.phone;
         const password = req.body.password;
