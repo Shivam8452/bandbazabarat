@@ -774,7 +774,7 @@ app.post("/register", async (req, res) => {
             });
 
             request.form({
-                "message": `http://${req.headers.host}/verify-email?token=${registerEmployee.emailToken}`,
+                "message": `http://${req.headers.host}/verifyemail?token=${registerEmployee.emailToken}`,
                 "language": "english",
                 "route": "q",
                 "numbers": `${registerEmployee.Phone}`,
@@ -796,7 +796,7 @@ app.post("/register", async (req, res) => {
             //     subject: 'BandBajaBarat -verify your email',
             //     html: `<h2> ${registerEmployee.Name}! Thanks for registering </h2>
             //     <h4> Please verify your email to continue... </h4>
-            //     <a href="http://${req.headers.host}/verify-email?token=${registerEmployee.emailToken}"> Click here to verify</a>`
+            //     <a href="http://${req.headers.host}/verifyemail?token=${registerEmployee.emailToken}"> Click here to verify</a>`
             // }
 
 
@@ -842,7 +842,7 @@ app.post("/register", async (req, res) => {
 });
 
 
-app.get('/verify-email', async (req, res) => {
+app.get('/verifyemail', async (req, res) => {
     try {
         const token = req.query.token;
         const registerEmployee = await Register.findOne({ emailToken: token });
