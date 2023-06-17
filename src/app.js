@@ -744,14 +744,6 @@ app.post("/register", async (req, res) => {
 
             await registerEmployee.save();
 
-            // const token = await registerEmployee.generateAuthToken();
-            // console.log("the token part" + token)
-
-            // res.cookie("jwt", token, {
-            //     expires: new Date(Date.now() + 1000*60*60*24),
-            //     httpOnly:true
-            // });
-
 
             // var options = {
             //     authorization: process.env.FAST_API_KEY,
