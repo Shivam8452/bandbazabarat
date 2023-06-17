@@ -742,7 +742,7 @@ app.post("/register", async (req, res) => {
                 termsprivacy: req.body.termsprivacy
             })
 
-
+            await registerEmployee.save();
 
             // const token = await registerEmployee.generateAuthToken();
             // console.log("the token part" + token)
@@ -795,7 +795,7 @@ app.post("/register", async (req, res) => {
             });
 
 
-            await registerEmployee.save();
+            
 
             // send varifiction mail to user
             // var maiOptions = {
